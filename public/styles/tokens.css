@@ -1,0 +1,72 @@
+/*
+  Token system. Every color used elsewhere in the stylesheet must
+  reference one of these custom properties — no bare hex values outside
+  this file (print.css intentionally overrides to the light set).
+*/
+
+:root {
+  /* ---- Light palette (default) ---- */
+  --navy: #0b1f3a;       /* primary text, name, headings */
+  --blue: #1e5aa8;       /* links, accents, timeline markers */
+  --blue-mid: #3d7fc4;   /* hover states, secondary accents */
+  --pale: #dce9f7;       /* section rules, hairlines, hover backgrounds */
+  --paper: #fbfcfe;      /* page background */
+  --ink-muted: #4a5a70;  /* secondary text: dates, captions */
+
+  --surface: #ffffff;    /* card/photo frame background */
+  --focus-ring: #1e5aa8;
+
+  /* Type scale */
+  --font-heading: "Fraunces", "Iowan Old Style", "Palatino Linotype", serif;
+  --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+
+  --step-xs: 0.875rem;
+  --step-sm: 1rem;
+  --step-md: 1.125rem;
+  --step-lg: 1.5rem;
+  --step-xl: 2rem;
+  --step-xxl: 2.75rem;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.5rem;
+  --space-6: 4rem;
+
+  --radius: 3px;
+  --content-max: 74rem;
+
+  color-scheme: light;
+}
+
+/* ---- Dark palette: a designed set, not an invert() ---- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --navy: #e8f0fb;
+    --blue: #7fb0ea;
+    --blue-mid: #5a8fcc;
+    --pale: #1c2e47;
+    --paper: #0a1628;
+    --ink-muted: #93a6c2;
+    --surface: #101f35;
+    --focus-ring: #7fb0ea;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --navy: #e8f0fb;
+  --blue: #7fb0ea;
+  --blue-mid: #5a8fcc;
+  --pale: #1c2e47;
+  --paper: #0a1628;
+  --ink-muted: #93a6c2;
+  --surface: #101f35;
+  --focus-ring: #7fb0ea;
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}

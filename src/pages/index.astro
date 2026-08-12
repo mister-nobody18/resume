@@ -1,0 +1,232 @@
+---
+import cv from "../../data/cv.json";
+
+const SITE_URL = "https://resume.soricu.com";
+const includePhone = process.env.CV_INCLUDE_PHONE === "true";
+const person = cv.person;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: person.name,
+  jobTitle: person.title,
+  url: SITE_URL,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Bucharest",
+    addressCountry: "RO",
+  },
+  email: `mailto:${person.email}`,
+  alumniOf: cv.education.map((e) => ({
+    "@type": "EducationalOrganization",
+    name: e.org,
+  })),
+  knowsAbout: cv.skills.categories.flatMap((c) => c.items),
+  sameAs: [person.linkedin.url, person.instagram.url].filter(Boolean),
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cristian Soricu — CV</title>
+    <meta
+      name="description"
+      content="CV of Cristian Soricu — engineering student at Politehnica University of Bucharest, background in live sound, moving into software."
+    />
+    <link rel="canonical" href={SITE_URL + "/"} />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content="Cristian Soricu — CV" />
+    <meta
+      property="og:description"
+      content="CV of Cristian Soricu — engineering student at Politehnica University of Bucharest, background in live sound, moving into software."
+    />
+    <meta property="og:url" content={SITE_URL + "/"} />
+    <meta property="og:image" content={SITE_URL + "/og-image.png"} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Cristian Soricu — CV" />
+    <meta
+      name="twitter:description"
+      content="CV of Cristian Soricu — engineering student at Politehnica University of Bucharest, background in live sound, moving into software."
+    />
+    <meta name="twitter:image" content={SITE_URL + "/og-image.png"} />
+
+    <link rel="preload" href="/fonts/Fraunces-Variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/SourceSans3-Variable.woff2" as="font" type="font/woff2" crossorigin />
+
+    <link rel="stylesheet" href="/styles/fonts.css" />
+    <link rel="stylesheet" href="/styles/tokens.css" />
+    <link rel="stylesheet" href="/styles/base.css" />
+    <link rel="stylesheet" href="/styles/layout.css" />
+    <link rel="stylesheet" href="/styles/components.css" />
+    <link rel="stylesheet" href="/styles/print.css" media="print" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme");
+          var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          document.documentElement.setAttribute("data-theme", stored || (prefersDark ? "dark" : "light"));
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div class="page">
+      <aside class="sidebar">
+        <div class="identity">
+          <div class="photo-frame">
+            <img src={person.photo} alt={person.photoAlt} width="180" height="180" />
+          </div>
+          <div class="actions">
+            <button type="button" class="btn" data-theme-toggle aria-pressed="false" aria-label="Switch to dark theme">
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36A5.4 5.4 0 0 1 12 3Z" />
+              </svg>
+              Theme
+            </button>
+            <a class="btn" href="/cv-cristian-soricu.pdf" download="cv-cristian-soricu.pdf">
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
+              </svg>
+              Download PDF
+            </a>
+          </div>
+        </div>
+
+        <address class="contact-list sidebar-block">
+          <div><a href={`mailto:${person.email}`}>{person.email}</a></div>
+          <div><a href={`mailto:${person.emailSecondary}`}>{person.emailSecondary}</a></div>
+          {includePhone && <div>{person.phone}</div>}
+          <div>
+            {person.linkedin.url ? (
+              <a href={person.linkedin.url} target="_blank" rel="noopener noreferrer">LinkedIn — {person.linkedin.label}</a>
+            ) : (
+              <span class="contact-note">LinkedIn — {person.linkedin.label}</span>
+            )}
+          </div>
+          <div>
+            <a href={person.instagram.url} target="_blank" rel="noopener noreferrer">Instagram — {person.instagram.handle}</a>
+          </div>
+          <div class="contact-note">{person.location}</div>
+        </address>
+
+        <div class="sidebar-block">
+          <h2 class="section-heading" id="skills-heading">Skills</h2>
+          {cv.skills.categories.map((group) => (
+            <div class="skill-group">
+              <span class="skill-group-label">{group.name}</span>
+              <ul class="chip-list">
+                {group.items.map((item) => (
+                  <li class="chip">{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <div class="sidebar-block">
+          <h2 class="section-heading" id="languages-heading">Languages</h2>
+          <ul class="plain-list">
+            {cv.languages.map((lang) => (
+              <li>
+                {lang.name}
+                {lang.level && <span class="level"> — {lang.level}</span>}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="sidebar-block">
+          <h2 class="section-heading" id="interests-heading">Interests</h2>
+          <ul class="chip-list">
+            {cv.interests.map((interest) => (
+              <li class="chip">{interest}</li>
+            ))}
+          </ul>
+        </div>
+      </aside>
+
+      <main class="main" id="main">
+        <header>
+          <h1>{person.name}</h1>
+          <p class="eyebrow">{person.title}</p>
+        </header>
+
+        <section aria-labelledby="profile-heading">
+          <h2 class="section-heading" id="profile-heading">Profile</h2>
+          <p>{cv.profile.text}</p>
+        </section>
+
+        <section aria-labelledby="experience-heading">
+          <h2 class="section-heading" id="experience-heading">Experience</h2>
+          <ol class="timeline">
+            {cv.experience.map((job) => (
+              <li class="timeline-entry">
+                <div class="timeline-heading">
+                  <h3>{job.role}</h3>
+                  <span class="timeline-org">{job.org}</span>
+                  <span class="timeline-dates">
+                    <time datetime={job.start}>{job.start}</time>
+                    {" – "}
+                    {job.current ? "present" : <time datetime={job.end}>{job.end}</time>}
+                  </span>
+                </div>
+                <p class="timeline-desc">{job.description}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section aria-labelledby="education-heading">
+          <h2 class="section-heading" id="education-heading">Education</h2>
+          <ol class="timeline">
+            {cv.education.map((edu) => (
+              <li class="timeline-entry">
+                <div class="timeline-heading">
+                  <h3>{edu.degree}</h3>
+                  <span class="timeline-org">{edu.org}</span>
+                  <span class="timeline-dates">
+                    <time datetime={edu.start}>{edu.start}</time>
+                    {" – "}
+                    {edu.current ? "present" : <time datetime={edu.end}>{edu.end}</time>}
+                  </span>
+                </div>
+                {edu.field && <p class="timeline-desc">{edu.field}</p>}
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section aria-labelledby="certificates-heading">
+          <h2 class="section-heading" id="certificates-heading">Certificates</h2>
+          <div class="cert-list">
+            {cv.certificates.map((cert) => (
+              <div class="cert">
+                <h3>{cert.name}</h3>
+                <p class="cert-issuer">
+                  {cert.issuer}
+                  {cert.issued && <> · <time datetime={cert.issued}>{cert.issued}</time></>}
+                </p>
+                <p>{cert.description}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/scripts/theme.js" defer></script>
+  </body>
+</html>

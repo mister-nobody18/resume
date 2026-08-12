@@ -1,0 +1,93 @@
+@page {
+  size: A4;
+  margin: 12mm;
+}
+
+@media print {
+  /* Print always uses the light palette, regardless of on-screen theme. */
+  :root {
+    --navy: #0b1f3a;
+    --blue: #1e5aa8;
+    --blue-mid: #3d7fc4;
+    --pale: #dce9f7;
+    --paper: #ffffff;
+    --ink-muted: #4a5a70;
+    --surface: #ffffff;
+    color-scheme: light;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  html,
+  body {
+    background: var(--paper);
+    font-size: 10.5pt;
+  }
+
+  .skip-link,
+  .actions,
+  .site-footer-note {
+    display: none !important;
+  }
+
+  .page {
+    max-width: none;
+    padding: 0;
+    gap: 8mm;
+    grid-template-columns: 50mm 1fr;
+    display: grid;
+  }
+
+  .sidebar {
+    position: static;
+    gap: var(--space-3);
+  }
+
+  h1 {
+    font-size: 20pt;
+  }
+
+  h2 {
+    font-size: 13pt;
+  }
+
+  h2,
+  h3,
+  .timeline-heading,
+  .skill-group-label {
+    break-after: avoid;
+  }
+
+  section,
+  .timeline-entry,
+  .cert,
+  .sidebar-block {
+    break-inside: avoid;
+  }
+
+  a {
+    color: var(--navy);
+    text-decoration: none;
+  }
+
+  /* Show the destination URL after external links, except the contact
+     block and social links, which are already plain, readable text. */
+  .main a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 8.5pt;
+    color: var(--ink-muted);
+  }
+
+  .contact-list a[href]::after,
+  .sidebar a[href]::after {
+    content: none;
+  }
+
+  .photo-frame {
+    width: 28mm;
+    height: 28mm;
+  }
+}
