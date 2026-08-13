@@ -24,13 +24,21 @@
     "text": "Data Loss Prevention specialist with five years in security operations at Societe Generale. Three years as an L1 DLP Analyst taught me to read an alert and tell signal from noise; as a DLP Functional Administrator I now sit on the other side of that, owning policy configuration, rule logic, and the day-to-day health of the platform. Alongside that, I build my own things in Python and on the web — day to day that means working with APIs in Python and leaning on AI coding tools like Claude Code and GitHub Copilot, which is where most of my curiosity goes lately. Before security I worked live sound — where I learned to stay calm when something breaks in front of an audience."
   },
   "experience": [
+        {
+      "role": "DLP Functional Administrator",
+      "org": "Societe Generale",
+      "start": "2021",
+      "end": null,
+      "current": true,
+      "description": "Own the functional side of the Data Loss Prevention platform: policy and rule configuration, detection tuning, and change management. Translate business and compliance requirements into working detection logic, and support the analyst team on escalations and false-positive reduction."
+    },
     {
-      "role": "Sound Technician",
-      "org": "Stage Expert",
-      "start": "2016",
-      "end": "2020",
+      "role": "L1 DLP Analyst",
+      "org": "Societe Generale",
+      "start": "2018",
+      "end": "2021",
       "current": false,
-      "description": "Freelance live sound for events. Learned what it means to work with a crew toward a common goal in the live industry."
+      "description": "Triaged and investigated data loss prevention incidents as first-line response, qualifying alerts, escalating confirmed cases, and documenting outcomes. Worked to consistent SLAs in a follow-the-sun security operations team."
     },
     {
       "role": "Sound Technician",
@@ -41,20 +49,12 @@
       "description": "Freelance live sound work on weekends and event dates. Coordinate crews of 5–6 people per event, consistently meeting or exceeding the band's expectations."
     },
     {
-      "role": "L1 DLP Analyst",
-      "org": "Societe Generale",
-      "start": "2018",
-      "end": "2021",
+      "role": "Sound Technician",
+      "org": "Stage Expert",
+      "start": "2016",
+      "end": "2020",
       "current": false,
-      "description": "Triaged and investigated data loss prevention incidents as first-line response, qualifying alerts, escalating confirmed cases, and documenting outcomes. Worked to consistent SLAs in a follow-the-sun security operations team."
-    },
-        {
-      "role": "DLP Functional Administrator",
-      "org": "Societe Generale",
-      "start": "2021",
-      "end": null,
-      "current": true,
-      "description": "Own the functional side of the Data Loss Prevention platform: policy and rule configuration, detection tuning, and change management. Translate business and compliance requirements into working detection logic, and support the analyst team on escalations and false-positive reduction."
+      "description": "Freelance live sound for events. Learned what it means to work with a crew toward a common goal in the live industry."
     }
   ],
   "education": [
