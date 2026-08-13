@@ -43,27 +43,27 @@
 /* ---- Dark palette: a designed set, not an invert() ---- */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --navy: #e8f0fb;
-    --blue: #7fb0ea;
-    --blue-mid: #5a8fcc;
-    --pale: #1c2e47;
-    --paper: #0a1628;
-    --ink-muted: #93a6c2;
-    --surface: #101f35;
-    --focus-ring: #7fb0ea;
+    --navy: #ede9fe;
+    --blue: #c084fc;
+    --blue-mid: #d8b4fe;
+    --pale: #201c33;
+    --paper: #0a0e1f;
+    --ink-muted: #9d97b8;
+    --surface: #151328;
+    --focus-ring: #c084fc;
     color-scheme: dark;
   }
 }
 
 :root[data-theme="dark"] {
-  --navy: #e8f0fb;
-  --blue: #7fb0ea;
-  --blue-mid: #5a8fcc;
-  --pale: #1c2e47;
-  --paper: #0a1628;
-  --ink-muted: #93a6c2;
-  --surface: #101f35;
-  --focus-ring: #7fb0ea;
+  --navy: #ede9fe;
+  --blue: #c084fc;
+  --blue-mid: #d8b4fe;
+  --pale: #201c33;
+  --paper: #0a0e1f;
+  --ink-muted: #9d97b8;
+  --surface: #151328;
+  --focus-ring: #c084fc;
   color-scheme: dark;
 }
 
