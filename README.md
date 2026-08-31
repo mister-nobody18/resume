@@ -93,15 +93,16 @@ Pages — deploy is a plain file upload into the domain's `public_html`:
 2. In DirectAdmin's File Manager, go to
    `domains/resume.soricu.com/public_html`.
 3. Upload the **contents** of `dist/` there (not the `dist` folder itself —
-   `index.html` needs to sit directly in `public_html`). The easiest way:
-   zip the contents of `dist/`, upload the zip via **Upload**, then select
-   it and use **Archive → Extract** into `public_html`, then delete the zip.
-4. **`.htaccess` specifically doesn't survive zip extraction reliably** —
-   confirmed on this host: `.well-known/security.txt` came through fine,
-   but `.htaccess` came out empty/garbled. After extracting, open
-   `public_html/.htaccess` in the File Manager editor and paste its content
-   in directly (copy from `public/.htaccess` in this repo) rather than
-   trusting the extractor for that one file.
+   `index.html` needs to sit directly in `public_html`), using File
+   Manager's multi-file/folder upload. Zip-and-extract is **not**
+   reliable on this host — confirmed here: `.well-known/security.txt`
+   came through fine on an extract, but `.htaccess` came out
+   empty/garbled. Upload files directly instead of going through a zip.
+4. Toggle "Show hidden files" in File Manager and confirm `.htaccess`
+   actually made it into `public_html` and matches `public/.htaccess` in
+   this repo (open it in the File Manager editor and compare, or just
+   overwrite it directly from that file's content) — don't rely on any
+   extractor for this one file.
 5. Visit `https://resume.soricu.com/` and check DevTools → Network → the
    document response has the `Content-Security-Policy` header (confirms
    `.htaccess` is being read — LiteSpeed honors Apache's `mod_headers`

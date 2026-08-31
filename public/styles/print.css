@@ -28,8 +28,7 @@
   }
 
   .skip-link,
-  .actions,
-  .site-footer-note {
+  .actions {
     display: none !important;
   }
 

@@ -2,6 +2,7 @@
 // blue-palette initials mark, using Playwright to rasterize inline SVG.
 // Run with: node scripts/gen-icons.mjs
 import { chromium } from "playwright";
+import sharp from "sharp";
 import { writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
@@ -82,8 +83,15 @@ await ogPage.close();
 
 await browser.close();
 
+// Playwright's screenshot() writes uncompressed-ish PNGs. These are flat
+// colors + text, ideal candidates for palette quantization — re-encoding
+// through sharp cuts og-image.png from ~320KB to a fraction of that with
+// no visible quality loss.
+const png180Optimized = await sharp(png180).png({ compressionLevel: 9, palette: true }).toBuffer();
+const ogBufOptimized = await sharp(ogBuf).png({ compressionLevel: 9, palette: true }).toBuffer();
+
 await writeFile(join(publicDir, "favicon.ico"), pngToIco([png16, png32]));
-await writeFile(join(publicDir, "apple-touch-icon.png"), png180);
-await writeFile(join(publicDir, "og-image.png"), ogBuf);
+await writeFile(join(publicDir, "apple-touch-icon.png"), png180Optimized);
+await writeFile(join(publicDir, "og-image.png"), ogBufOptimized);
 
 console.log("Generated favicon.ico, apple-touch-icon.png, og-image.png");
