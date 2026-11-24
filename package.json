@@ -14,10 +14,10 @@
     "icons": "node scripts/gen-icons.mjs"
   },
   "dependencies": {
-    "astro": "^7.2.1"
+    "astro": "^7.4.13"
   },
   "devDependencies": {
-    "playwright": "^1.62.1",
-    "sharp": "^0.35.4"
+    "playwright": "^1.65.1",
+    "sharp": "^0.35.5"
   }
 }
